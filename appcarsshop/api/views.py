@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import User, Product
-from .serializers import UserSerializer, ProductSerializer
+from .models import User, Product, Order, ProductOrdered
+from .serializers import UserSerializer, ProductSerializer, OrderSerializer, \
+    ProductOrderedSerializer
 from django.shortcuts import render
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -11,6 +12,15 @@ class UserViewSet(viewsets.ModelViewSet):
 class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
+
+class OrderViewSet(viewsets.ModelViewSet):
+    serializer_class = OrderSerializer
+    queryset = Order.objects.all()
+
+class ProductOrderedViewSet(viewsets.ModelViewSet):
+    serializer_class = ProductOrderedSerializer
+    queryset = ProductOrdered.objects.all().select_related('user')
+
 
 def users(request):
     users = User.objects.all()
