@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<h3>Users</h3>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td>{{user.id}}</td>
+        <td>{{user.username}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
